@@ -1,0 +1,90 @@
+table:
+  schema: public
+  name: department
+array_relationships:
+  - name: classes
+    using:
+      foreign_key_constraint_on:
+        column: department_id
+        table:
+          schema: public
+          name: class
+  - name: college_staffs
+    using:
+      foreign_key_constraint_on:
+        column: department_id
+        table:
+          schema: public
+          name: college_staff
+  - name: students
+    using:
+      foreign_key_constraint_on:
+        column: department_id
+        table:
+          schema: public
+          name: students
+insert_permissions:
+  - role: it_lead
+    permission:
+      check: {}
+      columns:
+        - id
+        - name
+        - created_at
+        - updated_at
+select_permissions:
+  - role: class_advisor
+    permission:
+      columns:
+        - id
+        - name
+        - created_at
+        - updated_at
+      filter: {}
+  - role: hod
+    permission:
+      columns:
+        - id
+        - name
+        - created_at
+        - updated_at
+      filter: {}
+  - role: it_lead
+    permission:
+      columns:
+        - id
+        - name
+        - created_at
+        - updated_at
+      filter: {}
+  - role: student
+    permission:
+      columns:
+        - id
+        - name
+        - created_at
+        - updated_at
+      filter: {}
+  - role: warden
+    permission:
+      columns:
+        - id
+        - name
+        - created_at
+        - updated_at
+      filter: {}
+update_permissions:
+  - role: it_lead
+    permission:
+      columns:
+        - id
+        - name
+        - created_at
+        - updated_at
+      filter: {}
+      check: null
+delete_permissions:
+  - role: it_lead
+    permission:
+      backend_only: false
+      filter: {}

@@ -1,0 +1,134 @@
+table:
+  schema: public
+  name: students
+object_relationships:
+  - name: class
+    using:
+      foreign_key_constraint_on: class_id
+  - name: department
+    using:
+      foreign_key_constraint_on: department_id
+  - name: hostel
+    using:
+      foreign_key_constraint_on: hostel_id
+array_relationships:
+  - name: passes
+    using:
+      foreign_key_constraint_on:
+        column: student_id
+        table:
+          schema: public
+          name: passes
+insert_permissions:
+  - role: it_lead
+    permission:
+      check: {}
+      columns: []
+select_permissions:
+  - role: class_advisor
+    permission:
+      columns:
+        - dob
+        - class_id
+        - department_id
+        - hostel_id
+        - id
+        - mail
+        - name
+        - phone
+        - rool
+        - created_at
+        - updated_at
+        - uid
+      filter:
+        class_id:
+          _eq: X-Hasura-class-id
+  - role: hod
+    permission:
+      columns:
+        - dob
+        - class_id
+        - department_id
+        - hostel_id
+        - id
+        - mail
+        - name
+        - phone
+        - rool
+        - created_at
+        - updated_at
+        - uid
+      filter:
+        department_id:
+          _eq: X-Hasura-department-id
+  - role: it_lead
+    permission:
+      columns:
+        - dob
+        - class_id
+        - department_id
+        - hostel_id
+        - id
+        - name
+        - phone
+        - rool
+        - created_at
+        - updated_at
+      filter: {}
+  - role: student
+    permission:
+      columns:
+        - dob
+        - class_id
+        - department_id
+        - hostel_id
+        - id
+        - mail
+        - name
+        - phone
+        - rool
+        - created_at
+        - updated_at
+        - uid
+      filter:
+        id:
+          _eq: X-Hasura-User-Id
+  - role: warden
+    permission:
+      columns:
+        - dob
+        - class_id
+        - department_id
+        - hostel_id
+        - id
+        - mail
+        - name
+        - phone
+        - rool
+        - created_at
+        - updated_at
+        - uid
+      filter:
+        hostel_id:
+          _eq: X-Hasura-hostel-id
+update_permissions:
+  - role: it_lead
+    permission:
+      columns:
+        - dob
+        - class_id
+        - department_id
+        - hostel_id
+        - id
+        - name
+        - phone
+        - rool
+        - created_at
+        - updated_at
+      filter: {}
+      check: null
+delete_permissions:
+  - role: it_lead
+    permission:
+      backend_only: false
+      filter: {}

@@ -1,0 +1,73 @@
+subscription getReqs(
+  $where: passes_bool_exp
+  $distinctOn: [passes_select_column!]
+  $limit: Int
+  $offset: Int
+  $orderBy: [passes_order_by!]
+) {
+  passes(
+    where: $where
+    distinct_on: $distinctOn
+    limit: $limit
+    offset: $offset
+    order_by: $orderBy
+  ) {
+    checked_in
+    checked_out
+    class_approved
+    class_rejected
+    start_datetime
+    end_datetime
+    hod_approved
+    hod_rejected
+    hostel_approval
+    hostel_rejected
+    reason
+    title
+    student_id
+    created_at
+    id
+    student {
+      name
+      mail
+      hostel {
+        name
+      }
+      department {
+        name
+      }
+      class {
+        name
+      }
+    }
+  }
+}
+
+subscription getTotalReqCount(
+  $limit: Int
+  $offset: Int
+  $where: passes_bool_exp
+  $distinctOn: [passes_select_column!]
+  $orderBy: [passes_order_by!]
+) {
+  passes_aggregate(
+    limit: $limit
+    offset: $offset
+    where: $where
+    distinct_on: $distinctOn
+    order_by: $orderBy
+  ) {
+    aggregate {
+      count
+    }
+  }
+}
+
+mutation update_passes(
+  $pkColumns: passes_pk_columns_input!
+  $set: passes_set_input
+) {
+  update_passes_by_pk(pk_columns: $pkColumns, _set: $set) {
+    id
+  }
+}

@@ -1,0 +1,7 @@
+- "!include public_class.yaml"
+- "!include public_college_staff.yaml"
+- "!include public_department.yaml"
+- "!include public_hostel.yaml"
+- "!include public_passes.yaml"
+- "!include public_staff_role.yaml"
+- "!include public_students.yaml"

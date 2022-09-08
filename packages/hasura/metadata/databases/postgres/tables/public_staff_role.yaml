@@ -1,0 +1,12 @@
+table:
+  schema: public
+  name: staff_role
+is_enum: true
+array_relationships:
+  - name: college_staffs
+    using:
+      foreign_key_constraint_on:
+        column: role
+        table:
+          schema: public
+          name: college_staff

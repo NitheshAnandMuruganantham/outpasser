@@ -1,0 +1,165 @@
+table:
+  schema: public
+  name: passes
+object_relationships:
+  - name: student
+    using:
+      foreign_key_constraint_on: student_id
+insert_permissions:
+  - role: student
+    permission:
+      check: {}
+      set:
+        student_id: x-hasura-user-id
+      columns:
+        - end_datetime
+        - reason
+        - start_datetime
+        - title
+select_permissions:
+  - role: class_advisor
+    permission:
+      columns:
+        - checked_in
+        - checked_out
+        - class_approved
+        - class_rejected
+        - hod_approved
+        - hod_rejected
+        - hostel_approval
+        - hostel_rejected
+        - id
+        - student_id
+        - reason
+        - title
+        - created_at
+        - end_datetime
+        - start_datetime
+        - updated_at
+      filter:
+        student:
+          class_id:
+            _eq: X-Hasura-class-id
+      allow_aggregations: true
+  - role: hod
+    permission:
+      columns:
+        - checked_in
+        - checked_out
+        - class_approved
+        - class_rejected
+        - hod_approved
+        - hod_rejected
+        - hostel_approval
+        - hostel_rejected
+        - id
+        - student_id
+        - reason
+        - title
+        - created_at
+        - end_datetime
+        - start_datetime
+        - updated_at
+      filter:
+        _and:
+          - student:
+              department_id:
+                _eq: X-Hasura-department-id
+          - class_approved:
+              _eq: true
+          - class_rejected:
+              _eq: false
+          - hostel_approval:
+              _eq: true
+          - hod_rejected:
+              _eq: false
+      allow_aggregations: true
+  - role: student
+    permission:
+      columns:
+        - checked_in
+        - checked_out
+        - class_approved
+        - class_rejected
+        - hod_approved
+        - hod_rejected
+        - hostel_approval
+        - hostel_rejected
+        - id
+        - student_id
+        - reason
+        - title
+        - created_at
+        - end_datetime
+        - start_datetime
+        - updated_at
+      filter:
+        student_id:
+          _eq: X-Hasura-User-Id
+      allow_aggregations: true
+  - role: warden
+    permission:
+      columns:
+        - checked_in
+        - checked_out
+        - class_approved
+        - class_rejected
+        - hod_approved
+        - hod_rejected
+        - hostel_approval
+        - hostel_rejected
+        - id
+        - student_id
+        - reason
+        - title
+        - created_at
+        - end_datetime
+        - start_datetime
+        - updated_at
+      filter:
+        _and:
+          - student:
+              hostel_id:
+                _eq: X-Hasura-hostel-id
+          - class_approved:
+              _eq: true
+          - class_rejected:
+              _eq: false
+      allow_aggregations: true
+update_permissions:
+  - role: class_advisor
+    permission:
+      columns:
+        - class_approved
+        - class_rejected
+      filter:
+        student:
+          class_id:
+            _eq: X-Hasura-class-id
+      check:
+        student:
+          class_id:
+            _eq: X-Hasura-class-id
+  - role: hod
+    permission:
+      columns:
+        - hod_approved
+        - hod_rejected
+      filter:
+        student:
+          department_id:
+            _eq: X-Hasura-department-id
+      check:
+        student:
+          department_id:
+            _eq: X-Hasura-department-id
+  - role: warden
+    permission:
+      columns:
+        - hostel_approval
+        - hostel_rejected
+      filter:
+        student:
+          hostel_id:
+            _eq: X-Hasura-hostel-id
+      check: null

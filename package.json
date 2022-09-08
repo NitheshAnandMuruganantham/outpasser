@@ -1,0 +1,17 @@
+{
+  "name": "infraweigh",
+  "version": "1.0.0",
+  "license": "MIT",
+  "private": "true",
+  "dependencies": {
+    "concurrently": "^7.2.1"
+  },
+  "workspaces": [
+    "packages/*"
+  ],
+  "repository": "https://github.com/NitheshAnanadMuruganandham/out-pass-automation.git",
+  "author": "nithesh  anand <anand252825@gmail.com>",
+  "scripts": {
+      },
+  "devDependencies": {}
+}

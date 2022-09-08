@@ -1,0 +1,104 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+/// This model has been renamed to 'Renamedclass' during introspection, because the original name 'class' is reserved.
+model Renamedclass {
+  name          String
+  id            Int             @id(map: "year_pkey") @default(autoincrement())
+  created_at    DateTime        @default(now()) @db.Timestamptz(6)
+  updated_at    DateTime        @default(now()) @db.Timestamptz(6)
+  department_id Int?
+  department    department?     @relation("classTodepartment", fields: [department_id], references: [id], onDelete: Restrict, onUpdate: Restrict)
+  college_staff college_staff[] @relation("classTocollege_staff")
+  students      students[]      @relation("classTostudents")
+
+  @@map("class")
+}
+
+model college_staff {
+  id                         Int           @id @default(autoincrement())
+  class_id                   Int?
+  department_id              Int?
+  name                       String
+  role                       String
+  hostel_id                  Int
+  blocked                    Boolean?
+  email_verified             Boolean?
+  refresh_token_hash         String?
+  forgot_password_token_hash String?
+  mail                       String
+  password                   String?
+  class                      Renamedclass? @relation("classTocollege_staff", fields: [class_id], references: [id], onDelete: Restrict, onUpdate: Restrict)
+  department                 department?   @relation(fields: [department_id], references: [id], onDelete: Restrict, onUpdate: Restrict)
+  hostel                     hostel        @relation(fields: [hostel_id], references: [id], onUpdate: Restrict)
+  staff_role                 staff_role    @relation(fields: [role], references: [role], onUpdate: Restrict)
+}
+
+model department {
+  name          String
+  id            Int             @id @default(autoincrement())
+  created_at    DateTime        @default(now()) @db.Timestamptz(6)
+  updated_at    DateTime        @default(now()) @db.Timestamptz(6)
+  class         Renamedclass[]  @relation("classTodepartment")
+  college_staff college_staff[]
+  students      students[]
+}
+
+model hostel {
+  id            Int             @id @default(autoincrement())
+  created_at    DateTime        @default(now()) @db.Timestamptz(6)
+  updated_at    DateTime        @default(now()) @db.Timestamptz(6)
+  name          String
+  location      String
+  college_staff college_staff[]
+  students      students[]
+}
+
+model passes {
+  title           String
+  reason          String
+  start_datetime  DateTime @db.Timestamptz(6)
+  end_datetime    DateTime @db.Timestamptz(6)
+  hod_rejected    Boolean  @default(false)
+  hod_approved    Boolean  @default(false)
+  id              Int      @id @default(autoincrement())
+  created_at      DateTime @default(now()) @db.Timestamptz(6)
+  updated_at      DateTime @default(now()) @db.Timestamptz(6)
+  student_id      Int
+  checked_out     Boolean? @default(false)
+  checked_in      Boolean? @default(false)
+  hostel_approval Boolean? @default(false)
+  hostel_rejected Boolean? @default(false)
+  class_approved  Boolean? @default(false)
+  class_rejected  Boolean? @default(false)
+  students        students @relation(fields: [student_id], references: [id], onUpdate: Restrict)
+}
+
+model staff_role {
+  role          String          @id
+  college_staff college_staff[]
+}
+
+model students {
+  name          String
+  rool          String
+  dob           DateTime      @db.Date
+  phone         String
+  id            Int           @id @default(autoincrement())
+  created_at    DateTime      @default(now()) @db.Timestamptz(6)
+  updated_at    DateTime      @default(now()) @db.Timestamptz(6)
+  hostel_id     Int?
+  department_id Int?
+  class_id      Int?
+  mail          String
+  class         Renamedclass? @relation("classTostudents", fields: [class_id], references: [id], onDelete: Restrict, onUpdate: Restrict)
+  department    department?   @relation(fields: [department_id], references: [id], onDelete: Restrict, onUpdate: Restrict)
+  hostel        hostel?       @relation(fields: [hostel_id], references: [id], onDelete: Restrict, onUpdate: Restrict)
+  passes        passes[]
+}

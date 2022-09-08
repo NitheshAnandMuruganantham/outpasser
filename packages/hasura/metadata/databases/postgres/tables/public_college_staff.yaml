@@ -1,0 +1,55 @@
+table:
+  schema: public
+  name: college_staff
+object_relationships:
+  - name: class
+    using:
+      foreign_key_constraint_on: class_id
+  - name: department
+    using:
+      foreign_key_constraint_on: department_id
+  - name: hostel
+    using:
+      foreign_key_constraint_on: hostel_id
+  - name: staff_role
+    using:
+      foreign_key_constraint_on: role
+insert_permissions:
+  - role: it_lead
+    permission:
+      check: {}
+      columns:
+        - class_id
+        - department_id
+        - hostel_id
+        - id
+        - name
+        - role
+select_permissions:
+  - role: it_lead
+    permission:
+      columns:
+        - class_id
+        - department_id
+        - hostel_id
+        - id
+        - name
+        - role
+      filter: {}
+update_permissions:
+  - role: it_lead
+    permission:
+      columns:
+        - class_id
+        - department_id
+        - hostel_id
+        - id
+        - name
+        - role
+      filter: {}
+      check: null
+delete_permissions:
+  - role: it_lead
+    permission:
+      backend_only: false
+      filter: {}
