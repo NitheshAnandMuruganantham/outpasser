@@ -12,7 +12,7 @@ export class MessengerService {
   async sendSMS(phone: string, dt: any) {
     try {
       const data = await this.client.client.messages.create({
-        body: `new request` + `\n` + `\n` + `\n` + `\n` + `\n`,
+        body: `new request generated` + `\n` + `\n` + `\n` + `\n` + `\n`,
         to: phone,
         from: this.config.get('TWILIO_PHONE'),
       });
