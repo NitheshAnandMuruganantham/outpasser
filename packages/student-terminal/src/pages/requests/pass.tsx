@@ -52,7 +52,7 @@ const Pass = (props: { data: any }) => {
                   marginLeft: "83px",
                   marginRight: "auto",
                 }}
-                value={`${props.data.id}`}
+                value={`${props.data.id} ${props.data.key}`}
               />
               <div
                 style={{

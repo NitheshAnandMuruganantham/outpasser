@@ -157,7 +157,7 @@ const Bills = () => {
               filterable: false,
               editable: false,
               valueGetter: (params) =>
-                params.row.checked_in ? "done" : "pending",
+                params.row.checked_out ? "done" : "pending",
             },
 
             {

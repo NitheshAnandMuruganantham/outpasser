@@ -10238,10 +10238,10 @@ nestjs-prisma@^0.18.0:
     "@angular-devkit/schematics" "^13.3.0"
     "@schematics/angular" "~13.3.0"
 
-nestjs-twilio@^3.0.0:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/nestjs-twilio/-/nestjs-twilio-3.0.0.tgz#7da47ec401e335600684aef556f27545b34e31bb"
-  integrity sha512-aD1L+HGBWAN3HbPHTwa3ws3Hi1QotVyFPUvOZFjjKDJ4IHtI9e5AiXlHfiFRgN8BB8YgAevRYtf8XGk+Fz9kDg==
+nestjs-twilio@^2.2.1:
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/nestjs-twilio/-/nestjs-twilio-2.2.1.tgz#ae4329eac751baea4ea7ee5dad9217eb75eb0e0b"
+  integrity sha512-Om7Wz1IY81sVwqhfkBwD/L+B37QyteI3PP4RmY6fK7EopQEfsKHzVvLpavItybNs5qshMfVkJlRAbKL5hBDwgw==
 
 netmask@^2.0.2:
   version "2.0.2"
@@ -10792,6 +10792,14 @@ pascal-case@^3.1.2:
     no-case "^3.0.4"
     tslib "^2.0.3"
 
+passport-headerapikey@^1.2.2:
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/passport-headerapikey/-/passport-headerapikey-1.2.2.tgz#b71960523999c9864151b8535c919e3ff5ba75ce"
+  integrity sha512-4BvVJRrWsNJPrd3UoZfcnnl4zvUWYKEtfYkoDsaOKBsrWHYmzTApCjs7qUbncOLexE9ul0IRiYBFfBG0y9IVQA==
+  dependencies:
+    lodash "^4.17.15"
+    passport-strategy "^1.0.0"
+
 passport-jwt@^4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/passport-jwt/-/passport-jwt-4.0.0.tgz#7f0be7ba942e28b9f5d22c2ebbb8ce96ef7cf065"
@@ -11071,7 +11079,7 @@ preview-email@3.0.5:
     pug "^3.0.2"
     uuid "^8.3.2"
 
-prisma@^4.3.1:
+prisma@4.3.1:
   version "4.3.1"
   resolved "https://registry.yarnpkg.com/prisma/-/prisma-4.3.1.tgz#9e4c24e49710392be40ee75fb3d9341d7487881e"
   integrity sha512-90xo06wtqil76Xsi3mNpc4Js3SdDRR5g4qb9h+4VWY4Y8iImJY6xc3PX+C9xxTSt1lr0Q89A0MLkJjd8ax6KiQ==

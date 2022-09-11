@@ -24,17 +24,17 @@ select_permissions:
         - checked_out
         - class_approved
         - class_rejected
+        - created_at
+        - end_datetime
         - hod_approved
         - hod_rejected
         - hostel_approval
         - hostel_rejected
         - id
-        - student_id
         - reason
-        - title
-        - created_at
-        - end_datetime
         - start_datetime
+        - student_id
+        - title
         - updated_at
       filter:
         student:
@@ -81,17 +81,18 @@ select_permissions:
         - checked_out
         - class_approved
         - class_rejected
+        - created_at
+        - end_datetime
         - hod_approved
         - hod_rejected
         - hostel_approval
         - hostel_rejected
         - id
-        - student_id
+        - key
         - reason
-        - title
-        - created_at
-        - end_datetime
         - start_datetime
+        - student_id
+        - title
         - updated_at
       filter:
         student_id:
@@ -163,3 +164,17 @@ update_permissions:
           hostel_id:
             _eq: X-Hasura-hostel-id
       check: null
+event_triggers:
+  - name: new_pass
+    definition:
+      enable_manual: false
+      insert:
+        columns: '*'
+    retry_conf:
+      num_retries: 0
+      interval_sec: 10
+      timeout_sec: 60
+    webhook_from_env: NEW_PASS_URL
+    headers:
+      - name: apikey
+        value_from_env: API_KEY

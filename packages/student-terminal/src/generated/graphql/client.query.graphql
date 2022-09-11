@@ -14,6 +14,7 @@ subscription getReqs(
   ) {
     checked_in
     checked_out
+    key
     class_approved
     class_rejected
     start_datetime

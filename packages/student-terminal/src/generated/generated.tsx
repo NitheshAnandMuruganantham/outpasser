@@ -1862,6 +1862,7 @@ export type Passes = {
   hostel_approval?: Maybe<Scalars['Boolean']>;
   hostel_rejected?: Maybe<Scalars['Boolean']>;
   id: Scalars['Int'];
+  key?: Maybe<Scalars['uuid']>;
   reason: Scalars['String'];
   start_datetime: Scalars['timestamptz'];
   /** An object relationship */
@@ -1952,6 +1953,7 @@ export type Passes_Bool_Exp = {
   hostel_approval?: InputMaybe<Boolean_Comparison_Exp>;
   hostel_rejected?: InputMaybe<Boolean_Comparison_Exp>;
   id?: InputMaybe<Int_Comparison_Exp>;
+  key?: InputMaybe<Uuid_Comparison_Exp>;
   reason?: InputMaybe<String_Comparison_Exp>;
   start_datetime?: InputMaybe<Timestamptz_Comparison_Exp>;
   student?: InputMaybe<Students_Bool_Exp>;
@@ -1985,6 +1987,7 @@ export type Passes_Insert_Input = {
   hostel_approval?: InputMaybe<Scalars['Boolean']>;
   hostel_rejected?: InputMaybe<Scalars['Boolean']>;
   id?: InputMaybe<Scalars['Int']>;
+  key?: InputMaybe<Scalars['uuid']>;
   reason?: InputMaybe<Scalars['String']>;
   start_datetime?: InputMaybe<Scalars['timestamptz']>;
   student?: InputMaybe<Students_Obj_Rel_Insert_Input>;
@@ -1999,6 +2002,7 @@ export type Passes_Max_Fields = {
   created_at?: Maybe<Scalars['timestamptz']>;
   end_datetime?: Maybe<Scalars['timestamptz']>;
   id?: Maybe<Scalars['Int']>;
+  key?: Maybe<Scalars['uuid']>;
   reason?: Maybe<Scalars['String']>;
   start_datetime?: Maybe<Scalars['timestamptz']>;
   student_id?: Maybe<Scalars['Int']>;
@@ -2011,6 +2015,7 @@ export type Passes_Max_Order_By = {
   created_at?: InputMaybe<Order_By>;
   end_datetime?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
+  key?: InputMaybe<Order_By>;
   reason?: InputMaybe<Order_By>;
   start_datetime?: InputMaybe<Order_By>;
   student_id?: InputMaybe<Order_By>;
@@ -2024,6 +2029,7 @@ export type Passes_Min_Fields = {
   created_at?: Maybe<Scalars['timestamptz']>;
   end_datetime?: Maybe<Scalars['timestamptz']>;
   id?: Maybe<Scalars['Int']>;
+  key?: Maybe<Scalars['uuid']>;
   reason?: Maybe<Scalars['String']>;
   start_datetime?: Maybe<Scalars['timestamptz']>;
   student_id?: Maybe<Scalars['Int']>;
@@ -2036,6 +2042,7 @@ export type Passes_Min_Order_By = {
   created_at?: InputMaybe<Order_By>;
   end_datetime?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
+  key?: InputMaybe<Order_By>;
   reason?: InputMaybe<Order_By>;
   start_datetime?: InputMaybe<Order_By>;
   student_id?: InputMaybe<Order_By>;
@@ -2072,6 +2079,7 @@ export type Passes_Order_By = {
   hostel_approval?: InputMaybe<Order_By>;
   hostel_rejected?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
+  key?: InputMaybe<Order_By>;
   reason?: InputMaybe<Order_By>;
   start_datetime?: InputMaybe<Order_By>;
   student?: InputMaybe<Students_Order_By>;
@@ -2110,6 +2118,8 @@ export enum Passes_Select_Column {
   /** column name */
   Id = 'id',
   /** column name */
+  Key = 'key',
+  /** column name */
   Reason = 'reason',
   /** column name */
   StartDatetime = 'start_datetime',
@@ -2134,6 +2144,7 @@ export type Passes_Set_Input = {
   hostel_approval?: InputMaybe<Scalars['Boolean']>;
   hostel_rejected?: InputMaybe<Scalars['Boolean']>;
   id?: InputMaybe<Scalars['Int']>;
+  key?: InputMaybe<Scalars['uuid']>;
   reason?: InputMaybe<Scalars['String']>;
   start_datetime?: InputMaybe<Scalars['timestamptz']>;
   student_id?: InputMaybe<Scalars['Int']>;
@@ -2217,6 +2228,8 @@ export enum Passes_Update_Column {
   HostelRejected = 'hostel_rejected',
   /** column name */
   Id = 'id',
+  /** column name */
+  Key = 'key',
   /** column name */
   Reason = 'reason',
   /** column name */
@@ -2547,6 +2560,7 @@ export enum Staff_Role_Enum {
   ClassAdvisor = 'class_advisor',
   Hod = 'hod',
   ItLead = 'it_lead',
+  Office = 'office',
   Warden = 'warden'
 }
 
@@ -3350,7 +3364,7 @@ export type GetReqsSubscriptionVariables = Exact<{
 }>;
 
 
-export type GetReqsSubscription = { __typename?: 'subscription_root', passes: Array<{ __typename?: 'passes', checked_in?: boolean | null, checked_out?: boolean | null, class_approved?: boolean | null, class_rejected?: boolean | null, start_datetime: any, end_datetime: any, hod_approved: boolean, hod_rejected: boolean, hostel_approval?: boolean | null, hostel_rejected?: boolean | null, reason: string, title: string, student_id: number, created_at: any, id: number, student: { __typename?: 'students', name: string, mail: string, hostel?: { __typename?: 'hostel', name: string } | null, department?: { __typename?: 'department', name: string } | null, class?: { __typename?: 'class', name: string } | null } }> };
+export type GetReqsSubscription = { __typename?: 'subscription_root', passes: Array<{ __typename?: 'passes', checked_in?: boolean | null, checked_out?: boolean | null, key?: any | null, class_approved?: boolean | null, class_rejected?: boolean | null, start_datetime: any, end_datetime: any, hod_approved: boolean, hod_rejected: boolean, hostel_approval?: boolean | null, hostel_rejected?: boolean | null, reason: string, title: string, student_id: number, created_at: any, id: number, student: { __typename?: 'students', name: string, mail: string, hostel?: { __typename?: 'hostel', name: string } | null, department?: { __typename?: 'department', name: string } | null, class?: { __typename?: 'class', name: string } | null } }> };
 
 export type GetTotalReqCountSubscriptionVariables = Exact<{
   limit?: InputMaybe<Scalars['Int']>;
@@ -3382,6 +3396,7 @@ export const GetReqsDocument = gql`
   ) {
     checked_in
     checked_out
+    key
     class_approved
     class_rejected
     start_datetime

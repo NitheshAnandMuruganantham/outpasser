@@ -37,8 +37,8 @@ const AddNewClient: React.FunctionComponent = () => {
           initialValues={{
             title: "",
             reason: "",
-            from: Date.now(),
-            to: Date.now(),
+            from: "",
+            to: "",
           }}
           validationSchema={() => {
             return Yup.object().shape({

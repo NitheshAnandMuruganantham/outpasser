@@ -40,7 +40,7 @@ services:
       HASURA_GRAPHQL_ENABLED_LOG_TYPES: startup, http-log, webhook-log, websocket-log, query-log
       HASURA_GRAPHQL_ADMIN_SECRET: myadminsecretkey
       HASURA_GRAPHQL_JWT_SECRET: '{"type":"RS256", "key": "-----BEGIN PUBLIC KEY-----\nMFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAKAmqyScP8f+0WYMVYPKZ0AYyqfkR1Fj\njnVXHIa6jQv1I3Dsu9QMB+A3qp4yJRW8DVtOpjbOuPzdrIMzk/ZAjw8CAwEAAQ==\n-----END PUBLIC KEY-----"}'
-      SERVER_URL: http://localhost:9090
+      NEW_PASS_URL: http://host.docker.internal:9090/webhooks/new/pass
       API_KEY: "someapikeyfordevlopment"
 volumes:
   db_data:
