@@ -32,8 +32,9 @@ model college_staff {
   email_verified             Boolean?
   refresh_token_hash         String?
   forgot_password_token_hash String?
-  mail                       String
+  mail                       String        @unique
   password                   String?
+  phone                      String
   class                      Renamedclass? @relation("classTocollege_staff", fields: [class_id], references: [id], onDelete: Restrict, onUpdate: Restrict)
   department                 department?   @relation(fields: [department_id], references: [id], onDelete: Restrict, onUpdate: Restrict)
   hostel                     hostel        @relation(fields: [hostel_id], references: [id], onUpdate: Restrict)
@@ -77,6 +78,7 @@ model passes {
   hostel_rejected Boolean? @default(false)
   class_approved  Boolean? @default(false)
   class_rejected  Boolean? @default(false)
+  key             String?  @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   students        students @relation(fields: [student_id], references: [id], onUpdate: Restrict)
 }
 
@@ -96,7 +98,8 @@ model students {
   hostel_id     Int?
   department_id Int?
   class_id      Int?
-  mail          String
+  mail          String        @unique
+  uid           String        @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   class         Renamedclass? @relation("classTostudents", fields: [class_id], references: [id], onDelete: Restrict, onUpdate: Restrict)
   department    department?   @relation(fields: [department_id], references: [id], onDelete: Restrict, onUpdate: Restrict)
   hostel        hostel?       @relation(fields: [hostel_id], references: [id], onDelete: Restrict, onUpdate: Restrict)

@@ -1,18 +1,19 @@
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { TwilioService } from 'nestjs-twilio';
+import { InjectTwilio, TwilioClient } from 'nestjs-twilio';
 
 @Injectable()
 export class MessengerService {
   constructor(
-    private readonly client: TwilioService,
+    @InjectTwilio()
+    private readonly client: TwilioClient,
     private config: ConfigService,
   ) {}
 
-  async sendSMS(phone: string, dt: any) {
+  async sendSMS(phone: string, body: string) {
     try {
-      const data = await this.client.client.messages.create({
-        body: `new request generated` + `\n` + `\n` + `\n` + `\n` + `\n`,
+      const data = await this.client.messages.create({
+        body,
         to: phone,
         from: this.config.get('TWILIO_PHONE'),
       });

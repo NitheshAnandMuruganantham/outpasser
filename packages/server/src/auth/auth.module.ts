@@ -4,6 +4,7 @@ import { JwtModule } from '@nestjs/jwt';
 import { AtGuard } from 'src/common/guards/at-gaurd';
 import { MailerService } from 'src/mailer/mailer.service';
 import { AtStrategy } from './at.statagy';
+import { ApiKeyStrategy } from './apiKey.strategy';
 
 import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
@@ -23,6 +24,7 @@ import { ThrottlerModule } from '@nestjs/throttler';
   providers: [
     AuthService,
     AtStrategy,
+    ApiKeyStrategy,
     RtStrategy,
     MailerService,
     {

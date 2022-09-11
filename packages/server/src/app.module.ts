@@ -9,6 +9,7 @@ import { AuthModule } from './auth/auth.module';
 import { MessengerService } from './messenger/messenger.service';
 import { TwilioModule } from 'nestjs-twilio';
 import { PrismaModule } from 'nestjs-prisma';
+import { WebhooksModule } from './webhooks/webhooks.module';
 
 import * as Joi from 'joi';
 
@@ -21,6 +22,8 @@ import * as Joi from 'joi';
         TWILIO_CONFIG: Joi.required(),
         TWILIO_PHONE: Joi.string().required(),
         ADMIN_SECRET: Joi.string().required(),
+        API_KEY: Joi.string().required(),
+        DEVICE_KEY: Joi.string().required(),
         HASURA_URL: Joi.string().required(),
         FORGOT_PASSWORD_SECRET: Joi.string().required(),
         AT_PRIVATE: Joi.string().required(),
@@ -71,6 +74,7 @@ import * as Joi from 'joi';
       inject: [ConfigService],
     }),
     MailerModule,
+    WebhooksModule,
   ],
   controllers: [AppController],
   providers: [AppService, MessengerService],
